@@ -29,7 +29,8 @@ jobs:
     steps:
       - name: Customized Keycloak Docker setup
         run: |
-          docker run --name keycloak_server -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:${{ matrix.version }} start-dev
+          docker run --name keycloak_server -d -p 8180:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password quay.io/keycloak/keycloak:${{ matrix.version }} start-dev
+          sleep 120
 
       - name: Keycloak Admin CLI
         uses: carlosthe19916/keycloak-action@master
