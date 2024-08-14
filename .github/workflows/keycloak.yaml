@@ -16,7 +16,7 @@ on:
       keycloak_cmd:
         description: "Command to execute in keycloak"
         default: "start-dev"
-        required: false
+        required: true
         type: string
   workflow_dispatch:
     inputs:
