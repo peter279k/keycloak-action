@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ["12.0.2", "19.0.3-legacy"]
+        version: ["12.0.2", "19.0.3-legacy", "25.0.2"]
       fail-fast: false
     services:
       keycloak:
@@ -27,6 +27,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Customized Keycloak Docker setup
+        run: |
+          docker run --name keycloak_server -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:${{ matrix.version }} start-dev
+
       - name: Keycloak Admin CLI
         uses: carlosthe19916/keycloak-action@master
         with:
